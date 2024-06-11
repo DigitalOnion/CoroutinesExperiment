@@ -3,14 +3,9 @@ package com.outerspace.coroutines_experiment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.lifecycle.lifecycleScope
 import com.outerspace.coroutines_experiment.databinding.ActivityMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,8 +21,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.infoObservable.observe(this as LifecycleOwner) {
-            binding.contentTextView.text = it
+        viewModel.infoLiveData.observe(this as LifecycleOwner) {
+            val txt = "${binding.contentTextView.text}\n${it}"
+            binding.contentTextView.text = txt
         }
 
         binding.startButton.setOnClickListener {
