@@ -26,12 +26,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.infoObservable.observe(this as LifecycleOwner) {
+        viewModel.infoObservablenew.observe(this as LifecycleOwner) {
             binding.contentTextView.text = it
         }
 
         binding.startButton.setOnClickListener {
-            viewModel.getFreshData()
+            viewModel.getData()
         }
     }
 }
