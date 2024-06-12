@@ -1,5 +1,7 @@
 package com.outerspace.coroutines_experiment
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.LifecycleOwner
@@ -14,10 +16,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         viewModel = ViewModelProvider(this as ViewModelStoreOwner)[MainViewModel::class.java]
 
-        super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -29,6 +31,13 @@ class MainActivity : AppCompatActivity() {
         binding.startButton.setOnClickListener {
             viewModel.getFreshData()
         }
+
+        // ---------------------------------------------------
+
+        binding.nextButton.setOnClickListener {
+            startActivity(Intent(this as Context, WebActivity::class.java))
+        }
+
     }
 }
 
